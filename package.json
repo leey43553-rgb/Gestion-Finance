@@ -1,0 +1,86 @@
+{
+  "name": "gestion-financiere",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Application de gestion financière hors-ligne pour les entreprises en Algérie",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "build:single": "vite build --mode singlefile",
+    "preview": "vite preview",
+    "electron:dev": "node scripts/electron-dev.mjs",
+    "dist": "npm run build && electron-builder",
+    "test": "vitest run",
+    "clean": "rm -rf dist dist-single release",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "dexie": "^4.4.7",
+    "dexie-react-hooks": "^4.4.0",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "react-router-dom": "^7.18.5",
+    "recharts": "^3.10.1",
+    "vite": "^8.3.0",
+    "xlsx": "^0.18.5",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.4.21",
+    "electron": "^35.1.5",
+    "electron-builder": "^25.1.8",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite-plugin-singlefile": "^2.3.4",
+    "vitest": "^5.1.0"
+  },
+  "build": {
+    "appId": "dz.gestionfinanciere.desktop",
+    "productName": "Gestion Financière",
+    "copyright": "Copyright © 2026 SophyCrea",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "artifactName": "Gestion-Financiere-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false,
+      "language": "1036",
+      "installerLanguages": ["fr_FR"]
+    },
+    "portable": {
+      "artifactName": "Gestion-Financiere-Portable-${version}-${arch}.${ext}"
+    }
+  }
+}
